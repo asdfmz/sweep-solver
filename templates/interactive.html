@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Matrix Viewer</title>
+</head>
+<body>
+
+<h1>行基本変形の履歴</h1>
+
+{% for entry in view.entries %}
+  <div>
+    <p>ステップ {{ entry.step }} {% if entry.is_current %} (現在位置) {% endif %}</p>
+
+    {% if entry.query_human %}
+      <p>{{ entry.query_human }}</p>
+    {% endif %}
+
+    {% if entry.query_latex %}
+      <p>\\[{{ entry.query_latex }}\\]</p>
+    {% endif %}
+
+    <table border="1">
+      {% for row in entry.matrix %}
+        <tr>
+          {% for cell in row.split() %}
+            <td>{{ cell }}</td>
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+{% endfor %}
+
+</body>
+</html>
