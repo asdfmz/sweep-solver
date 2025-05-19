@@ -47,7 +47,7 @@ def main():
     failures = [t for t in data["tests"] if t["outcome"] == "failed"]
 
     if not failures:
-        print("🎉 すべてのテストが成功しました！")
+        print("すべてのテストが成功しました！！")
     else:
         for i, test in enumerate(failures, 1):
             name = test["nodeid"]
