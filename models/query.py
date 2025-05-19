@@ -18,19 +18,21 @@ class Query:
 
     @classmethod
     def from_dict(cls, d: dict) -> "Query":
+        r_raw = d.get("r", "")
+        r_str = str(r_raw).strip()
         return cls(
             OperationType(d["o"]),
-            d["t"],
+            int(d["t"]),
             d["f"],
-            d.get("r")
+            int(r_str) if r_str else None
         )
 
     def to_dict(self) -> dict:
         return {
             "o": self.op.value,
-            "t": self.target,
+            "t": str(self.target),
             "f": self.factor,
-            "r": self.other
+            "r": str(self.other) if self.other is not None else ""
         }
 
     def to_elementary_matrix(self, size: int) -> Matrix:
