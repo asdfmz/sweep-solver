@@ -27,3 +27,18 @@ def test_gaussian_elimination_simple():
     for matrix, query in steps:
         assert query.op in {OperationType.MULTIPLY, OperationType.ADD, OperationType.SWAP}
         assert isinstance(query.factor, str)
+
+
+def test_gaussian_elimination_rref():
+    original = Matrix([[1, 2, 1], [2, 4, 0], [3, 6, 3]])
+    steps = gaussian_elimination_steps(original)
+    final_matrix = steps[-1][0]
+
+    expected = Matrix([
+        [1, 2, 0],
+        [0, 0, 1],
+        [0, 0, 0]
+    ])
+
+    assert final_matrix.equals(expected)
+    assert len(steps) > 0  # 少なくとも1ステップ以上は変形されること
