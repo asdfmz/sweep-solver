@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Sweep Solver{% endblock %}</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 2em;
+    }
+    .matrix-latex {
+      font-size: 1.2em;
+      margin: 1em 0;
+    }
+    .current-matrix-block {
+      background: #f4f4f4;
+      padding: 1em;
+      border-radius: 8px;
+      margin-bottom: 2em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sweep Solver</h1>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Sweep Solver</p>
+  </footer>
+</body>
+</html>

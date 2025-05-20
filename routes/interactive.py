@@ -2,6 +2,7 @@ from flask import Blueprint, request, session, redirect, render_template, url_fo
 from sympy import Matrix
 from models.query import Query
 from models.session_manager import SessionManager
+from services.query_normalizer import from_ui_indexed
 from services.row_operations import apply_and_simplify
 from services.auto_solver import gaussian_elimination_steps
 from views.history_view_model import MatrixHistoryViewModel
@@ -20,6 +21,7 @@ def index():
 def apply():
     manager = SessionManager.from_session(session["m"])
     query = Query.from_dict(request.form)
+    query = from_ui_indexed(query)
     matrix = manager.current().matrix
     result = apply_and_simplify(matrix, query)
     manager.push(result, query)
