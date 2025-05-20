@@ -1,5 +1,6 @@
 from models.query import Query, OperationType
-from views.formatter import QueryFormatter
+from sympy import Matrix
+from views.formatter import QueryFormatter, MatrixFormatter
 
 
 def test_to_latex_multiply():
@@ -30,3 +31,16 @@ def test_to_human_add():
 def test_to_human_swap():
     q = Query(OperationType.SWAP, target=2, factor="1", other=0)
     assert QueryFormatter.to_human(q) == "3行目と1行目を入れ替える"
+
+
+def test_matrix_to_latex():
+    m = Matrix([[1, 2], [3, 4]])
+    latex = MatrixFormatter.to_latex(m)
+    expected = "\\begin{bmatrix}1 & 2 \\\\ 3 & 4\\end{bmatrix}"
+    assert latex == expected
+
+
+def test_matrix_to_latex_empty():
+    m = Matrix([])
+    latex = MatrixFormatter.to_latex(m)
+    assert latex == "\\begin{bmatrix}\\end{bmatrix}"

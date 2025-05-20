@@ -1,4 +1,5 @@
 from models.query import Query, OperationType
+from sympy import Matrix
 
 
 class QueryFormatter:
@@ -27,3 +28,10 @@ class QueryFormatter:
             r = query.other + 1
             return f"{t}行目と{r}行目を入れ替える"
         return ""
+
+class MatrixFormatter:
+    @staticmethod
+    def to_latex(matrix: Matrix) -> str:
+        return "\\begin{bmatrix}" + " \\\\ ".join(
+            [" & ".join(map(str, row)) for row in matrix.tolist()]
+        ) + "\\end{bmatrix}"
