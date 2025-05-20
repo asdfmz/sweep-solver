@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>行列サイズ指定</title></head>
+<body>
+
+<h1>行列サイズの指定</h1>
+
+<form method="post" action="{{ url_for('init_matrix.input_form') }}">
+  行数: <input type="number" name="rows" min="1" max="10"><br>
+  列数: <input type="number" name="cols" min="1" max="10"><br>
+  <input type="submit" value="次へ">
+</form>
+
+</body>
+</html>
