@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-lg);
+  align-items: flex-start;
+}
+
+.left-column {
+  flex: 2;
+  min-width: 300px;
+}
+
+.right-column {
+  flex: 1;
+  min-width: 300px;
+}
+
+@media (max-width: var(--break-md)) {
+  .container {
+    flex-direction: column;
+  }
+}
+
+/* ====== スマホ対応（簡易） ====== */
+@media (max-width: var(--break-sm)) {
+  body {
+    margin: var(--space-sm);
+  }
+
+  .block-section,
+  .card {
+    padding: var(--space-sm);
+  }
+
+  form {
+    gap: var(--font-xs);
+  }
+}

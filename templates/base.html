@@ -3,26 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}Sweep Solver{% endblock %}</title>
+
+  <!-- MathJax -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
   </script>
-  <style>
-    body {
-      font-family: sans-serif;
-      margin: 2em;
-    }
-    .matrix-latex {
-      font-size: 1.2em;
-      margin: 1em 0;
-    }
-    .current-matrix-block {
-      background: #f4f4f4;
-      padding: 1em;
-      border-radius: 8px;
-      margin-bottom: 2em;
-    }
-  </style>
+
+  <!-- 外部CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/tokens.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
+
 </head>
 <body>
   <header>

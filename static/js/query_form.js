@@ -1,41 +1,48 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const opSelect = document.getElementById("o");
+  const opInput = document.getElementById("operationInput");
   const factorGroup = document.getElementById("factor-group");
   const refRowGroup = document.getElementById("ref-row-group");
   const factorInput = document.getElementById("f");
   const rInput = document.getElementById("r");
   const tInput = document.getElementById("t");
 
-  // Pythonテンプレートから注入される変数
+  const opButtons = document.querySelectorAll(".op-btn");
+
   const offset = oneIndexed ? 1 : 0;
   const max = maxIndex + offset;
 
-  // 操作の種類に応じて表示・必須属性を切り替える
-  function updateVisibility() {
-    const op = opSelect.value;
-
-    // 係数フィールド
+  function updateVisibility(op) {
     factorGroup.style.display = (op === "m" || op === "a") ? "block" : "none";
     factorInput.required = (op === "m" || op === "a");
     if (!factorInput.required) factorInput.value = "";
 
-    // 参照行フィールド
     refRowGroup.style.display = (op === "a" || op === "s") ? "block" : "none";
     rInput.required = (op === "a" || op === "s");
     if (!rInput.required) rInput.value = "";
   }
 
-  // 入力フィールドの min/max を設定
+  // 操作切り替えボタンのイベント
+  opButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const selectedOp = btn.dataset.op;
+      opInput.value = selectedOp;
+
+      opButtons.forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+
+      updateVisibility(selectedOp);
+    });
+  });
+
+  // min/maxとバリデーション
   function updateMinMax(input) {
     input.min = offset;
     input.max = max;
   }
 
-  // エラーメッセージのリアルタイム表示
   function attachValidation(input) {
     const msgId = `${input.id}-error`;
 
-    // エラーメッセージ要素を追加（なければ）
     if (!document.getElementById(msgId)) {
       const span = document.createElement("span");
       span.id = msgId;
@@ -59,10 +66,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // 初期化処理
-  opSelect.addEventListener("change", updateVisibility);
-  updateVisibility();
-
+  // 初期化（hiddenの値から）
+  updateVisibility(opInput.value);
   [tInput, rInput].forEach(updateMinMax);
   [tInput, rInput].forEach(attachValidation);
 });

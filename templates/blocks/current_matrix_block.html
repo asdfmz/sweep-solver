@@ -2,7 +2,7 @@
   <h2>現在の行列</h2>
   <div class="matrix-latex">
     \[
-      {{ view.entries[view.current_step].matrix_latex }}
+      {{ view.entries[view.current_step].matrix_latex | safe }}
     \]
   </div>
 </div>

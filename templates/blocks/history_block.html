@@ -3,14 +3,13 @@
   {% for entry in view.entries %}
     {% if entry.query_latex %}
       <p>\[ {{ entry.query_latex }} \]</p>
-      <p>{{ entry.query_human }}</p>
     {% endif %}
     <div style="display: flex; align-items: center; margin-bottom: 1em;">
       <div class="matrix-latex">
         \[ {{ entry.matrix_latex }} \]
       </div>
       <form method="get" action="/solve/jump/{{ entry.step }}">
-        <button type="submit">状態{{ entry.step + 1 }}にジャンプ</button>
+        <button type="submit">状態{{ entry.step }}にジャンプ</button>
       </form>
     </div>
   {% endfor %}

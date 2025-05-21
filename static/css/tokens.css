@@ -1,0 +1,36 @@
+:root {
+  /* === カラー === */
+  --color-bg: #f9f9f9;                  /* ページ全体の背景 */
+  --color-surface: #ffffff;            /* セクション・カードなどの面 */
+  --color-text: #222;                  /* 通常テキスト */
+  --color-muted: #666;                 /* 補足・小さなテキスト */
+  --color-primary: #4CAF50;            /* メインのアクセント色（ボタンなど） */
+  --color-primary-hover: #43a047;      /* ホバー時の濃いアクセント */
+  --color-border: #ddd;                /* 枠線のグレー */
+  --color-highlight: #e0f7fa;          /* ハイライト背景（履歴の現在ステップ） */
+  --color-highlight-border: #26c6da;   /* ハイライト枠線 */
+  --color-card-edge: #f0f0f0;          /* 行列などの囲い背景 */
+  --color-link: #2c3e50;               /* タイトルやリンクの色（header h1） */
+
+  /* === フォントサイズ === */
+  --font-xs: 0.8rem;
+  --font-sm: 0.9rem;
+  --font-base: 1rem;                   /* 通常のUI文字 */
+  --font-lg: 1.3rem;
+  --font-xl: 2rem;                     /* ページタイトルなど */
+
+  /* === スペーシング（余白） === */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+
+  /* === ラウンド角・影など === */
+  --radius: 10px;
+  --shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+
+  /* === ブレークポイント === */
+  --break-sm: 600px;
+  --break-md: 768px;
+
+}

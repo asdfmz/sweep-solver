@@ -1,0 +1,22 @@
+/* ====== セクションカード ====== */
+.block-section,
+.card,
+.manual-form-block,
+.current-matrix-block,
+.history-block,
+.auto-button-block {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow);
+}
+
+/* ====== 行列表示 ====== */
+.matrix-latex {
+  font-size: var(--font-lg);
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #f0f0f0;
+  border-radius: calc(var(--radius) * 0.6);
+}

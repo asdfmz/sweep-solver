@@ -1,15 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head><title>行列サイズ指定</title></head>
-<body>
+{% extends "base.html" %}
 
-<h1>行列サイズの指定</h1>
+{% block title %}行列サイズ指定{% endblock %}
 
-<form method="post" action="{{ url_for('init_matrix.input_form') }}">
-  行数: <input type="number" name="rows" min="1" max="10"><br>
-  列数: <input type="number" name="cols" min="1" max="10"><br>
-  <input type="submit" value="次へ">
-</form>
+{% block content %}
+  <div class="block-section">
+    <h2>行列サイズの指定</h2>
 
-</body>
-</html>
+    <form method="post" action="{{ url_for('init_matrix.input_form') }}">
+      <label for="rows">行数:</label>
+      <input type="number" name="rows" id="rows" min="1" max="10" required><br>
+
+      <label for="cols">列数:</label>
+      <input type="number" name="cols" id="cols" min="1" max="10" required><br>
+
+      <button type="submit">次へ</button>
+    </form>
+  </div>
+{% endblock %}

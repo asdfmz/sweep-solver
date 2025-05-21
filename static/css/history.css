@@ -1,0 +1,13 @@
+/* ====== 履歴のステップ表示 ====== */
+.history-entry {
+  border: 1px solid var(--color-border);
+  padding: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  border-radius: calc(var(--radius) * 0.8);
+  background-color: var(--color-surface);
+}
+
+.history-entry.current {
+  background-color: var(--color-highlight);
+  border-color: var(--color-highlight-border);
+}

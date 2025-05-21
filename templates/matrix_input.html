@@ -1,26 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head><title>行列入力</title></head>
-<body>
+{% extends "base.html" %}
 
-<h1>行列の値を入力</h1>
+{% block title %}行列の値を入力{% endblock %}
 
-<form method="post" action="{{ url_for('init_matrix.start_session') }}">
-  <input type="hidden" name="rows" value="{{ rows }}">
-  <input type="hidden" name="cols" value="{{ cols }}">
+{% block content %}
+  <div class="block-section">
+    <h2>行列の値を入力</h2>
 
-  <table>
-    {% for i in range(rows) %}
-      <tr>
-        {% for j in range(cols) %}
-          <td><input type="text" name="cell_{{ i }}_{{ j }}" value="0" size="4"></td>
+    <form method="post" action="{{ url_for('init_matrix.start_session') }}">
+      <input type="hidden" name="rows" value="{{ rows }}">
+      <input type="hidden" name="cols" value="{{ cols }}">
+
+      <table>
+        {% for i in range(rows) %}
+          <tr>
+            {% for j in range(cols) %}
+              <td><input type="text" name="cell_{{ i }}_{{ j }}" value="0" size="4"></td>
+            {% endfor %}
+          </tr>
         {% endfor %}
-      </tr>
-    {% endfor %}
-  </table>
+      </table>
 
-  <input type="submit" value="開始">
-</form>
-
-</body>
-</html>
+      <button type="submit">開始</button>
+    </form>
+  </div>
+{% endblock %}

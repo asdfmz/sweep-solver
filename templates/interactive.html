@@ -3,10 +3,23 @@
 {% block title %}インタラクティブ操作{% endblock %}
 
 {% block content %}
+<div class="container">
+  <div class="left-column">
+    <div class="block-section current-matrix-block">
+      {% include "blocks/current_matrix_block.html" %}
+    </div>
+    <div class="block-section history-block">
+      {% include "blocks/history_block.html" %}
+    </div>
+  </div>
 
-  {% include "blocks/current_matrix_block.html" %}
-  {% include "blocks/manual_form_block.html" %}
-  {% include "blocks/auto_button_block.html" %}
-  {% include "blocks/history_block.html" %}
-
+  <div class="right-column">
+    <div class="block-section auto-button-block">
+      {% include "blocks/auto_button_block.html" %}
+    </div>
+    <div class="block-section manual-form-block">
+      {% include "blocks/manual_form_block.html" %}
+    </div>
+  </div>
+</div>
 {% endblock %}

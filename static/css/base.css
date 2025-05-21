@@ -1,0 +1,39 @@
+/* ====== 全体設定 ====== */
+body {
+  font-family: "Helvetica Neue", sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  margin: var(--space-lg);
+  line-height: 1.6;
+}
+
+/* ====== タイトルと見出し ====== */
+header h1 {
+  font-size: var(--space-lg);
+  margin-bottom: var(--space-md);
+  color: #2c3e50;
+}
+
+h2 {
+  font-size: var(--font-lg);
+  margin-bottom: var(--space-sm);
+  border-left: 5px solid var(--color-primary);
+  padding-left: var(--space-xs);
+  color: var(--color-text);
+}
+
+/* ====== スマホ対応（簡易） ====== */
+@media (max-width: 600px) {
+  body {
+    margin: var(--space-sm);
+  }
+
+  .block-section,
+  .card {
+    padding: var(--space-sm);
+  }
+
+  form {
+    gap: var(--font-xs);
+  }
+}
