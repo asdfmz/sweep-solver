@@ -5,15 +5,16 @@ from models.query import Query, OperationType
 def apply_and_simplify(matrix: Matrix, query: Query) -> Matrix:
     m = matrix.copy()
     t = query.target
-    f = simplify(query.factor)
     r = query.other
 
     if query.op == OperationType.MULTIPLY:
+        f = simplify(query.factor)
         m.row_op(t, lambda v, _: f * v)
 
     elif query.op == OperationType.ADD:
         if r is None:
             raise ValueError("ADD operation requires another row index.")
+        f = simplify(query.factor)
         m.row_op(t, lambda v, j: v + f * m[r, j])
 
     elif query.op == OperationType.SWAP:
