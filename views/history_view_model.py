@@ -9,6 +9,7 @@ class MatrixHistoryViewModel:
     def __init__(self, session_manager: SessionManager):
         self.entries: List[Dict] = []
         self.current_index = session_manager.current_step
+        self.matrix_shape = session_manager.history[0].matrix.shape
 
         for i, state in enumerate(session_manager.history):
             display_query = to_ui_indexed(state.query) if state.query else None
@@ -25,5 +26,7 @@ class MatrixHistoryViewModel:
     def to_dict(self) -> Dict:
         return {
             "entries": self.entries,
-            "current_step": self.current_index
+            "current_step": self.current_index, 
+            "rows": self.matrix_shape[0],
+            "cols": self.matrix_shape[1]
         }

@@ -1,22 +1,35 @@
 <div class="manual-form-block">
   <h2>手動操作</h2>
-  <form method="post" action="/solve/apply">
-    <label for="o">操作:</label>
-    <select name="o" id="o">
-      <option value="m">定数倍</option>
-      <option value="a">加算</option>
-      <option value="s">交換</option>
-    </select>
+  <form method="post" action="/solve/apply" id="query-form">
+    <div>
+      <label for="o">操作:</label>
+      <select name="o" id="o" required>
+        <option value="m">定数倍</option>
+        <option value="a">加算</option>
+        <option value="s">交換</option>
+      </select>
+    </div>
 
-    <label for="t">対象行 (1-indexed):</label>
-    <input type="number" name="t" id="t" min="1" required>
+    <div>
+      <label for="t">対象行:</label>
+      <input type="number" name="t" id="t" required>
+    </div>
 
-    <label for="f">係数:</label>
-    <input type="text" name="f" id="f" required>
+    <div id="factor-group">
+      <label for="f">係数:</label>
+      <input type="text" name="f" id="f">
+    </div>
 
-    <label for="r">参照行 (1-indexed, 加算/交換のみ):</label>
-    <input type="number" name="r" id="r">
+    <div id="ref-row-group">
+      <label for="r">参照行:</label>
+      <input type="number" name="r" id="r">
+    </div>
 
     <button type="submit">適用</button>
   </form>
 </div>
+<script>
+  const maxIndex = {{ max_index }};
+  const oneIndexed = {{ "true" if config.ONE_INDEXED else "false" }};
+</script>
+<script src="{{ url_for('static', filename='js/query_form.js') }}"></script>

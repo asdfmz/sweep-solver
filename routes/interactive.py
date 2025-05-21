@@ -6,6 +6,7 @@ from services.query_normalizer import from_ui_indexed
 from services.row_operations import apply_and_simplify
 from services.auto_solver import gaussian_elimination_steps
 from views.history_view_model import MatrixHistoryViewModel
+import config
 
 bp = Blueprint("interactive", __name__)
 
@@ -14,7 +15,17 @@ bp = Blueprint("interactive", __name__)
 def index():
     manager = SessionManager.from_session(session["m"])
     view = MatrixHistoryViewModel(manager)
-    return render_template("interactive.html", view=view.to_dict())
+
+    # 現在の行列の行数を取得（例：3行×4列なら 3）
+    current_matrix = view.entries[view.current_index]["matrix"]
+    row_count = len(current_matrix)
+
+    return render_template(
+        "interactive.html",
+        view=view.to_dict(),
+        config=config,
+        max_index=row_count - 1
+    )
 
 
 @bp.route("/apply", methods=["POST"])
