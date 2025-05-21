@@ -15,7 +15,7 @@ class MatrixHistoryViewModel:
             display_query = to_ui_indexed(state.query) if state.query else None
             entry = {
                 "step": i,
-                "matrix": sympy_codec.matrix_to_string_list(state.matrix),
+                "matrix": sympy_codec.matrix_to_json_serializable(state.matrix),
                 "matrix_latex": MatrixFormatter.to_latex(state.matrix),
                 "query_latex": QueryFormatter.to_latex(display_query) if display_query else None,
                 "query_human": QueryFormatter.to_human(display_query) if display_query else None,

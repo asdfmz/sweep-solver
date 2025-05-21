@@ -2,7 +2,7 @@ from flask import Blueprint, request, session, redirect, render_template, url_fo
 from sympy import Matrix
 from models.matrix_state import MatrixState
 from models.session_manager import SessionManager
-from utils.sympy_codec import string_list_to_matrix
+from utils.sympy_codec import matrix_from_json_serializable
 
 bp = Blueprint("init_matrix", __name__)
 
@@ -34,14 +34,15 @@ def start_session():
         rows = int(request.form["rows"])
         cols = int(request.form["cols"])
         data = []
+
         for i in range(rows):
             row = []
             for j in range(cols):
                 cell = request.form.get(f"cell_{i}_{j}", "0")
-                row.append(cell)
-            data.append(" ".join(row))
+                row.append(cell.strip())
+            data.append(row)  # ← 行をそのままappend（空白結合しない）
 
-        matrix = string_list_to_matrix(data)
+        matrix = matrix_from_json_serializable(data)
         manager = SessionManager([MatrixState(matrix)], 0)
         session["m"] = manager.to_session()
 
@@ -49,3 +50,4 @@ def start_session():
 
     except Exception:
         return redirect(url_for("init_matrix.size_form"))
+

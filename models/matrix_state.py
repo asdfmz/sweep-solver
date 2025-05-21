@@ -11,13 +11,13 @@ class MatrixState:
 
     def to_dict(self) -> dict:
         return {
-            "matrix": sympy_codec.matrix_to_string_list(self.matrix),
+            "matrix": sympy_codec.matrix_to_json_serializable(self.matrix),
             "query": self.query.to_dict() if self.query else None
         }
 
     @classmethod
     def from_dict(cls, data: dict) -> "MatrixState":
-        matrix = sympy_codec.string_list_to_matrix(data["matrix"])
+        matrix = sympy_codec.matrix_from_json_serializable(data["matrix"])
         query = Query.from_dict(data["query"]) if data["query"] else None
         return cls(matrix, query)
 
