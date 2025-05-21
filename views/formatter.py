@@ -1,5 +1,5 @@
 from models.query import Query, OperationType
-from sympy import Matrix
+from sympy import Matrix, latex, sympify
 
 
 class QueryFormatter:
@@ -7,10 +7,12 @@ class QueryFormatter:
     def to_latex(query: Query) -> str:
         t = query.target
         if query.op == OperationType.MULTIPLY:
-            return f"R_{{{t}}} \\to {query.factor} R_{{{t}}}"
+            factor_latex = latex(sympify(query.factor))
+            return f"R_{{{t}}} \\leftarrow {factor_latex} R_{{{t}}}"
         elif query.op == OperationType.ADD:
             r = query.other
-            return f"R_{{{t}}} \\to R_{{{t}}} + {query.factor} R_{{{r}}}"
+            factor_latex = latex(sympify(query.factor))
+            return f"R_{{{t}}} \\leftarrow R_{{{t}}} + {factor_latex} R_{{{r}}}"
         elif query.op == OperationType.SWAP:
             r = query.other
             return f"R_{{{t}}} \\leftrightarrow R_{{{r}}}"
@@ -32,6 +34,4 @@ class QueryFormatter:
 class MatrixFormatter:
     @staticmethod
     def to_latex(matrix: Matrix) -> str:
-        return "\\begin{bmatrix}" + " \\\\ ".join(
-            [" & ".join(map(str, row)) for row in matrix.tolist()]
-        ) + "\\end{bmatrix}"
+        return latex(matrix, mode="equation")
