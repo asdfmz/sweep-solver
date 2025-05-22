@@ -17,19 +17,29 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
-
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/components/app-header.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/components/app-footer.css') }}">
 </head>
 <body>
-  <header>
-    <h1>Sweep Solver</h1>
+  <header class="app-header">
+    <h1 class="app-header__title">
+      <a href="/">Sweep Solver</a>
+    </h1>
+    <hr>
   </header>
 
   <main>
     {% block content %}{% endblock %}
   </main>
 
-  <footer>
-    <p>&copy; 2025 Sweep Solver</p>
+  <footer class="app-footer">
+    <hr>
+    <p class="app-footer__copyright">
+        &copy; 2025 asdfmz
+        | <a href="https://github.com/asdfmz/sweep_solver" target="_blank">GitHub</a>
+    </p>
   </footer>
+
+  {% block scripts %}{% endblock %}
 </body>
 </html>

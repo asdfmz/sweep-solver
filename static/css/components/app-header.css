@@ -1,0 +1,8 @@
+.app-header__title {
+  text-align: center;
+}
+
+.app-header__title a {
+  text-decoration: none;
+  color: inherit;
+}
