@@ -26,7 +26,7 @@
   --space-lg: 2rem;
 
   /* === ラウンド角・影など === */
-  --radius: 10px;
+  --radius: 0px;
   --shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 
   /* === ブレークポイント === */

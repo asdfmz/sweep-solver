@@ -1,48 +1,54 @@
-document.addEventListener("DOMContentLoaded", function () {
+// 手動操作フォームに関する処理（操作種別選択と入力欄の制御）
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const opTypeButtons = document.querySelectorAll(".op-type-btn");
   const opInput = document.getElementById("operationInput");
   const factorGroup = document.getElementById("factor-group");
   const refRowGroup = document.getElementById("ref-row-group");
-  const factorInput = document.getElementById("f");
-  const rInput = document.getElementById("r");
   const tInput = document.getElementById("t");
+  const fInput = document.getElementById("f");
+  const rInput = document.getElementById("r");  
 
-  const opButtons = document.querySelectorAll(".op-btn");
+  const config = document.getElementById("validation-config");
+  const oneIndexed = config.dataset.oneIndexed === "true";
+  const maxIndex = parseInt(config.dataset.maxIndex, 10);
+  console.log(oneIndexed);
+  console.log(maxIndex);
 
-  const offset = oneIndexed ? 1 : 0;
-  const max = maxIndex + offset;
+  const offset = typeof oneIndexed !== "undefined" && oneIndexed ? 1 : 0;
+  const max = typeof maxIndex !== "undefined" ? maxIndex + offset : 10;
+  console.log(offset, max);
+  function updateMinMax(input) {
+    input.min = offset;
+    input.max = max;
+  }
 
   function updateVisibility(op) {
     factorGroup.style.display = (op === "m" || op === "a") ? "block" : "none";
-    factorInput.required = (op === "m" || op === "a");
-    if (!factorInput.required) factorInput.value = "";
+    fInput.required = (op === "m" || op === "a");
+    if (!fInput.required) fInput.value = "";
 
     refRowGroup.style.display = (op === "a" || op === "s") ? "block" : "none";
     rInput.required = (op === "a" || op === "s");
     if (!rInput.required) rInput.value = "";
   }
 
-  // 操作切り替えボタンのイベント
-  opButtons.forEach(btn => {
+  opTypeButtons.forEach(btn => {
     btn.addEventListener("click", () => {
+
+      opTypeButtons.forEach(b => b.classList.remove("is-selected"));
+      btn.classList.add("is-selected");
+
       const selectedOp = btn.dataset.op;
       opInput.value = selectedOp;
-
-      opButtons.forEach(b => b.classList.remove("selected"));
-      btn.classList.add("selected");
-
+      console.log(selectedOp);
       updateVisibility(selectedOp);
     });
   });
 
-  // min/maxとバリデーション
-  function updateMinMax(input) {
-    input.min = offset;
-    input.max = max;
-  }
-
   function attachValidation(input) {
     const msgId = `${input.id}-error`;
-
     if (!document.getElementById(msgId)) {
       const span = document.createElement("span");
       span.id = msgId;
@@ -60,14 +66,15 @@ document.addEventListener("DOMContentLoaded", function () {
         msgEl.textContent = "数値を入力してください。";
       } else if (val < offset || val > max) {
         msgEl.textContent = `${offset} 以上 ${max} 以下の値を入力してください。`;
+        console.log("今エラー出てるんだよ");
       } else {
         msgEl.textContent = "";
       }
     });
   }
 
-  // 初期化（hiddenの値から）
   updateVisibility(opInput.value);
   [tInput, rInput].forEach(updateMinMax);
   [tInput, rInput].forEach(attachValidation);
+
 });

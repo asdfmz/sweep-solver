@@ -20,3 +20,61 @@
   background: #f0f0f0;
   border-radius: calc(var(--radius) * 0.6);
 }
+
+/* ====== 操作ブロック全体 ====== */
+.operation-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.mode-panel,
+.op-type-panel {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-xs);
+  width: 100%;
+}
+
+.form-panel {
+  flex: 1;
+}
+
+/* ====== 手動操作フォーム横並び ====== */
+.manual-inline-row {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-sm);
+}
+
+.manual-inline-row .form-group {
+  display: flex;
+  flex-direction: row;
+}
+
+.input-short {
+  width: 6rem;
+}
+
+/* ====== モード/種別切り替えボタン（共通） ====== */
+.mode-btn,
+.op-type-btn {
+  padding: var(--space-xs);
+  border: 1px solid var(--color-primary);
+  border-radius: calc(var(--radius) * 0.6);
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  flex-grow: 1;
+}
+
+.mode-btn.is-selected,
+.op-type-btn.is-selected {
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+}

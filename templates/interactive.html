@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}インタラクティブ操作{% endblock %}
+{% block title %}インタラクティブ操作 -Sweep Solver{% endblock %}
 
 {% block content %}
+
 <div class="container">
+
   <div class="left-column">
     <div class="block-section current-matrix-block">
       {% include "blocks/current_matrix_block.html" %}
@@ -14,12 +16,37 @@
   </div>
 
   <div class="right-column">
-    <div class="block-section auto-button-block">
-      {% include "blocks/auto_button_block.html" %}
-    </div>
-    <div class="block-section manual-form-block">
-      {% include "blocks/manual_form_block.html" %}
+    <div class="block-section operation-block">
+
+      <div class="mode-panel">
+        <button class="mode-btn is-selected" data-mode="manual">手動</button>
+        <button class="mode-btn" data-mode="auto">自動</button>
+      </div>
+
+      <div class="form-panel">
+        <div id="manual-section">
+          {% include "blocks/manual_form_block.html" %}
+        </div>
+        <div id="auto-section" style="display: none;">
+          {% include "blocks/auto_button_block.html" %}
+        </div>
+      </div>
+
     </div>
   </div>
+
 </div>
+
+<!-- Flaskテンプレート -->
+<div id="validation-config" 
+  data-one-indexed="{{ config.ONE_INDEXED | lower }}" 
+  data-max-index="{{ max_index }}"
+  style="display: none;"></div>
+
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/mode_switch.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/manual_form.js') }}"></script>
 {% endblock %}

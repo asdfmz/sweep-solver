@@ -1,77 +1,35 @@
 <div class="manual-form-block">
   <h2>手動操作</h2>
   <form method="post" action="/solve/apply" id="query-form">
-    
+
     <!-- 操作切り替えボタン -->
-    <div class="operation-switch">
-      <button type="button" class="op-btn selected" data-op="m">定数倍</button>
-      <button type="button" class="op-btn" data-op="a">加算</button>
-      <button type="button" class="op-btn" data-op="s">交換</button>
+    <div class="form-group op-type-panel">
+      <button type="button" class="op-type-btn is-selected" data-op="m">定数倍</button>
+      <button type="button" class="op-type-btn" data-op="a">加算</button>
+      <button type="button" class="op-type-btn" data-op="s">交換</button>
     </div>
-    <input type="hidden" name="o" id="operationInput" value="m">
 
     <!-- 対象行 -->
-    <div>
+    <div class="form-group">
       <label for="t">対象行:</label>
-      <input type="number" name="t" id="t" required>
+      <input type="number" name="t" id="t" class="input-short" required>
     </div>
 
-    <!-- 係数（定数倍・加算で使用） -->
-    <div id="factor-group">
+    <!-- 係数 -->
+    <div class="form-group" id="factor-group">
       <label for="f">係数:</label>
-      <input type="text" name="f" id="f">
+      <input type="text" name="f" id="f" class="input-short">
     </div>
 
-    <!-- 参照行（加算・交換で使用） -->
-    <div id="ref-row-group">
+    <!-- 参照行 -->
+    <div class="form-group" id="ref-row-group">
       <label for="r">参照行:</label>
-      <input type="number" name="r" id="r">
+      <input type="number" name="r" id="r" class="input-short">
     </div>
+
+    <!-- 操作種別の値を送信 -->
+    <input type="hidden" name="o" id="operationInput" value="m">
 
     <button type="submit">適用</button>
   </form>
 </div>
-
-<!-- 操作切り替えロジック -->
-<script>
-  const opButtons = document.querySelectorAll('.op-btn');
-  const opInput = document.getElementById('operationInput');
-
-  const factorGroup = document.getElementById('factor-group');
-  const refRowGroup = document.getElementById('ref-row-group');
-
-  function updateFieldVisibility(op) {
-    // 初期化
-    factorGroup.style.display = 'none';
-    refRowGroup.style.display = 'none';
-
-    if (op === 'm') {
-      factorGroup.style.display = 'block';
-    } else if (op === 'a') {
-      factorGroup.style.display = 'block';
-      refRowGroup.style.display = 'block';
-    } else if (op === 's') {
-      refRowGroup.style.display = 'block';
-    }
-  }
-
-  opButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      opButtons.forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      const selectedOp = btn.dataset.op;
-      opInput.value = selectedOp;
-      updateFieldVisibility(selectedOp);
-    });
-  });
-
-  // 初期表示の制御
-  document.addEventListener('DOMContentLoaded', () => {
-    updateFieldVisibility(opInput.value);
-  });
-</script>
-<script>
-  const maxIndex = {{ max_index }};
-  const oneIndexed = {{ "true" if config.ONE_INDEXED else "false" }};
-</script>
-<script src="{{ url_for('static', filename='js/query_form.js') }}"></script>
