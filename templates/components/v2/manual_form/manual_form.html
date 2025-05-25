@@ -1,0 +1,11 @@
+<div class="v2-submit-button">
+  <button type="submit" class="v2-submit-button__btn">適用</button>
+</div><div class="v2-manual-form">
+  <h2 class="v2-manual-form__heading">手動操作</h2>
+  <form id="v2-manual-form" method="post" action="/solve/apply">
+    {% include "components/v2/manual_form/operation_selector.html" %}
+    {% include "components/v2/manual_form/input_fields.html" %}
+    {% include "components/v2/manual_form/hidden_input.html" %}
+    {% include "components/v2/manual_form/submit_button.html" %}
+  </form>
+</div>
