@@ -1,60 +1,60 @@
-# Sweep Solver — A Structured Matrix Row Operation Tool
+# Sweep Solver ― 行基本変形・掃き出し法ツール
 
-Sweep Solver は、行列の行基本変形・掃き出し法を対話的に実行できる Web ツールです。  
-このリポジトリは、その構造的設計・実装・テスト・運用を一貫して記録・公開することを目的としています。
+![demo](docs/demo.gif) <!-- ← 後で追加予定のGIF -->
 
-## 🧠 設計思想
+**Sweep Solver** は、行基本変形をステップごとに確認しながら実行できる、シンプルなWebツールです。連立一次方程式や逆行列の、掃き出し法による求解に活用できます。
 
-- モジュールごとの責務分離（MVC的な思想）
-- 状態管理の明示性とセッションベースの履歴復元
-- 操作履歴の段階的出力（LaTeX形式など）
-- 将来的なAPI連携・アプリ化を見据えた設計
-- テスト駆動と可視化を意識した開発
+🌐 リンク → [https://sweep-solver.com](https://sweep-solver.com)
 
-## 📁 ファイル構成（初期）
+---
 
+## 🔧 主な機能
+
+- 行列サイズを指定して値を入力
+- 行基本変形（加算・定数倍・交換）をインタラクティブに実行
+- 自動で掃き出し法を行う機能
+- 履歴表示やステップのやり直し機能
+- 分数・ルート・複素数にも対応
+- スマホ表示にも対応
+
+---
+
+## ⚙️ 技術スタック
+
+- Python 3
+- Flask
+- HTML / CSS / JavaScript
+- Gunicorn
+- Nginx
+
+---
+
+## 🧠 設計概要
+
+行基本変形は内部的に `Query` インスタンスとして構造化され、Pythonの `SymPy` による行列操作が行われます。ステップの履歴は JSON シリアライズ可能な形式に変換され、Flaskのセッションに保存されています。
+
+また、インタラクティブページでは PRG（Post/Redirect/Get）パターンを採用し、再投稿やセッションの不整合を回避する構成になっています。
+
+---
+
+## 📄 ライセンス
+
+MIT License
+
+---
+
+## 🛠 導入方法（開発者向け）
+
+以下の手順でローカル実行できます。
+
+```bash
+git clone https://github.com/asdfmz/sweep-solver.git
+cd sweep-solver
+python3 -m venv venv
+source venv/bin/activate  # Windowsの場合は venv\Scripts\activate
+pip install -r requirements.txt
+flask run
 ```
-sweep_solver/
-├── app.py                     # Entry point / Blueprint registration
-├── routes/interactive.py      # Flask route definitions
-├── models/                    # 状態・操作の内部表現
-│   ├── query.py
-│   ├── matrix_state.py
-│   └── session_manager.py
-├── services/                  # 実処理ロジック（掃き出し法など）
-│   ├── row_operations.py
-│   └── auto_solver.py
-├── views/                     # 表示形式変換（Latex・履歴構造）
-│   ├── formatter.py
-│   └── history_view_model.py
-├── utils/                     # 汎用ユーティリティ（SymPy⇔JSONなど）
-│   └── sympy_codec.py
-├── templates/interactive.html # UIテンプレート
-├── tests/                     # 各層の単体テスト
-│   └── test_*.py
-```
-
-## 🚧 実装状況
-
-現在は設計と構成構築のみ完了しています。  
-今後は以下の順に実装・テストを進めていきます：
-
-1. models/query.py
-2. utils/sympy_codec.py
-3. services/row_operations.py
-4. models/matrix_state.py
-5. models/session_manager.py
-6. views/formatter.py
-7. views/history_view_model.py
-8. services/auto_solver.py
-9. routes/interactive.py
-10. app.py
-11. templates/interactive.html
-
-## 🔭 今後の展望
-
-- Render/VPS へのデプロイと公開運用
-- スマホアプリ化
 
 ---
 
