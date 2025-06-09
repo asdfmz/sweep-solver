@@ -13,8 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const config = document.getElementById("validation-config");
   const oneIndexed = config.dataset.oneIndexed === "true";
   const maxIndex = parseInt(config.dataset.maxIndex, 10);
-  console.log(oneIndexed);
-  console.log(maxIndex);
 
   const offset = typeof oneIndexed !== "undefined" && oneIndexed ? 1 : 0;
   const max = typeof maxIndex !== "undefined" ? maxIndex + offset : 10;
@@ -66,7 +64,6 @@ document.addEventListener("DOMContentLoaded", () => {
         msgEl.textContent = "数値を入力してください。";
       } else if (val < offset || val > max) {
         msgEl.textContent = `${offset} 以上 ${max} 以下の値を入力してください。`;
-        console.log("今エラー出てるんだよ");
       } else {
         msgEl.textContent = "";
       }
